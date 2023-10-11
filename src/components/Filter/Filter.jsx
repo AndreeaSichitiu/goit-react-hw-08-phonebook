@@ -1,0 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { updateFilter } from 'redux/filter/filterSlice';
+import { selectFilter } from 'redux/contacts/selectors';
+import { Container, TextField, Typography } from '@mui/material';
+
+export const Filter = () => {
+  const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+
+  const handleChangeFilter = e => {
+    dispatch(updateFilter(e.currentTarget.value));
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Typography sx={{ mb: 1 }} fontSize="22px" color="#212121" paragraph>
+        Find contacts by name:
+      </Typography>
+      <TextField
+        sx={{ my: 0.5 }}
+        margin="normal"
+        fullWidth
+        name="filter"
+        value={filter}
+        size="small"
+        onChange={handleChangeFilter}
+      />
+    </Container>
+  );
+};
